@@ -8,6 +8,10 @@ function createFilm (obj){
   article += '<i class="fas fa-heart js-heart"></i>';
   article +='</article>';
   return article;
+  //hay que poner la imagen alternativa por si no tiene
+  //  if (obj.show.image === null){
+    //article +='<img class="js-image-film" src="' + imgTemporary + '" alt="Carátula de la película">'
+    //}
 }
 // console.log(createFilm);
 function createFavourites (obj){
@@ -27,17 +31,11 @@ const imgTemporary = 'https://via.placeholder.com/210x295/ffffff/666666/';
 function paintFilm (obj){
   let searchedFilm = document.querySelector('.wrapper-films');
   searchedFilm.innerHTML += createFilm(obj);
-  //hay que poner la imagen alternativa por si no tiene, con un for (img of obj) {
-  //  if (obj.show.image === null){
-    //article +='<img class="js-image-film" src="' + imgTemporary + '" alt="Carátula de la película">'
-    //}
 }
 //console.log(paintFilm);
 function paintFavourite (obj){
   let searchedFilm = document.querySelector('.js-favourites');
   searchedFilm.innerHTML += createFavourites(obj);
-  //hay que poner la imagen alternativa por si no tiene.
-  }
 }
 //RECORREMOS el array y llamamos a la función 2º para cada objeto.
 
@@ -53,10 +51,8 @@ function chargeFavourite (array){
     paintFavourite (item);
   }
 }
-//5º ¡¡vamos a crear nuestra lista de Favoritos!!
-//creamos una función en la que: cambie el background (se le añade) cuando se haga "click".
-// si es la primera vez que se le da click, se añade a la LISTA DE FAVORITOS que tenemos VACÍA.
-// si no, se le quita de la lista.
+//creamos la lista de Favoritos.
+//creamos una función en la que: cambie el color del corazón (según esté en la lista) cuando se haga "click".
 
 let favouriteList=[];
 let filteredFilm =[];
@@ -79,7 +75,8 @@ function changeHeart (ev){
   localStorage.setItem('fav', JSON.stringify(favouriteList));
 }
 
-// función para leer lo que escribe el usuario y activarlo con el botón de búsqeuda.Aquí vamos a hacer el Fetch para empezar a ver los resultados de lo que estamos pintando.(recuerda que hay que poner la url que se nos ha dado + lo que el usuario ponga en el input!!)
+// función para leer lo que escribe el usuario y activarlo con el botón de búsqeuda.
+//Aquí vamos a hacer el Fetch para empezar a ver los resultados de lo que estamos pintando.
 const btn = document.querySelector('.js-search-btn');
 
 function userSearch (ev){
@@ -99,13 +96,14 @@ function userSearch (ev){
       }
     });
 }
+
+// listeners
 btn.addEventListener('click',userSearch);
 
-// 6º Añadir listeners!!!
-// uno para el botón de buscar (cuidado!!!! se debería resetear en cada búsqueda)
-// otro para añadir a favoritos
 // estaría bien otro para quitar de favoritos
 // el último, en el botón del reset de la lista de favoritos, para quitarlos a todos de una vez.
+
+// fucnión para recargar la página con la lista de favoritos cargada (si hay favoritos).
 function loadPage (){
  let favs = localStorage.getItem('fav');
  if (favs !== null){
