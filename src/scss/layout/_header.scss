@@ -1,5 +1,37 @@
-.page__header {
+.header-wrapper {
   display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 3rem;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 13px;
+  top: 0;
+  
+  .title {
+    color:rgb(11, 167, 146);
+    font-family: 'Solway', serif;
+  }
+
+  .searching {
+    .userSearch{
+     border-radius: 5px;
+     padding: 3px;
+     font-family: 'Solway', serif;
+    }
+
+    .search-btn {
+      border-radius: 5px;
+      padding: 3px;
+      text-transform: capitalize;
+      background-color: rgb(241, 160, 160);
+      
+    }
+    .search-btn:hover {
+      cursor: pointer;
+    }
+    .search-btn:active {
+      transform: translateY(4px);
+    }
+  }  
 }
+
+
