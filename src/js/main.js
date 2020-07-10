@@ -19,16 +19,25 @@ function createFavourites (obj){
   
   return list;
 }
+
+const imgTemporary = 'https://via.placeholder.com/210x295/ffffff/666666/';
+
 //Hacemos otra función que PINTA el 1º paso en la página.
 
 function paintFilm (obj){
   let searchedFilm = document.querySelector('.wrapper-films');
   searchedFilm.innerHTML += createFilm(obj);
+  //hay que poner la imagen alternativa por si no tiene, con un for (img of obj) {
+  //  if (obj.show.image === null){
+    //article +='<img class="js-image-film" src="' + imgTemporary + '" alt="Carátula de la película">'
+    //}
 }
 //console.log(paintFilm);
 function paintFavourite (obj){
   let searchedFilm = document.querySelector('.js-favourites');
   searchedFilm.innerHTML += createFavourites(obj);
+  //hay que poner la imagen alternativa por si no tiene.
+  }
 }
 //RECORREMOS el array y llamamos a la función 2º para cada objeto.
 
@@ -45,12 +54,13 @@ function chargeFavourite (array){
   }
 }
 //5º ¡¡vamos a crear nuestra lista de Favoritos!!
-//creamos una función en la que :
-// 1º se le cambie el background (se le añade) cuando se haga "click". (¿dónde?, ya veremos si da tiempo)
-// 2º SIIIIIII... es la primera vez que se le da click, se añade a la LISTA DE FAVORITOS que tenemos VACÍA.
-// 3º si NOOOOO es la primera vez... se le quita de la lista (cuidado! hay que buscar su índice y quitarla con un splice).
+//creamos una función en la que: cambie el background (se le añade) cuando se haga "click".
+// si es la primera vez que se le da click, se añade a la LISTA DE FAVORITOS que tenemos VACÍA.
+// si no, se le quita de la lista.
+
 let favouriteList=[];
 let filteredFilm =[];
+
 function changeHeart (ev){
   let id = parseInt(ev.currentTarget.id);
   let heart = ev.currentTarget.querySelector('.js-heart');
