@@ -6,8 +6,8 @@
 
 // 1º crear el html de las películas (function getfilm ¿?)
    // '<article class="" id="art-' + object.id + '">
-   // '<p class=""' + object.title + '</p>',
-   // '<img class="" src="' + object.image + '" alt="Carátula de la película"',
+   // '<p class=""' + object.title + '></p>',
+   // '<img class="" src="' + object.image + '" alt="Carátula de la película">',
    // '</article>'
 
 // 2º crear otra función que PINTA el 1º paso en la página(de momento sin info dentro).
