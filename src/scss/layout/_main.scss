@@ -42,18 +42,18 @@
     box-shadow: black 0px 0px 13px 1px;
     font-family: $font-primary;
 
-   .js-title{
+   .js-title {
     font-size: medium;
     margin: 20px;
     color:$color-light;
     text-transform: uppercase;
    }
-   .js-image-film{
+   .js-image-film {
     height: 160px;
     width: 140px;
     border-radius: 10px;
    }
-   .js-heart{
+   .js-heart {
      margin: 20px;
      font-size: 20px; 
     }
@@ -61,7 +61,7 @@
   article:active {
   transform: translateY(4px);
   }
-  article:hover{
+  article:hover {
     box-shadow: yellow 0px 0px 13px 1px;
   }
   .wrapper-favourites {
@@ -69,7 +69,7 @@
     padding:20px;
     width: 20%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: flex-start;
     flex-wrap: wrap;
     order: -1;
@@ -80,7 +80,7 @@
     font-family: $font-primary;
     background-color:$color-primary;
 
-    h2{
+    h2 {
      width: 90%;
      margin: 15px 5px;
      color:$color-light;
@@ -88,13 +88,25 @@
      text-align: center;
      text-transform: uppercase;
     }
-    ul{
+    ul {
       margin: 15px 5px;
-      li{
+      .wrapper-li {
        margin: 15px 5px;
+       padding: 5px;
+       display: flex;
+       flex-direction: row;
+       justify-content: space-around;
        border-radius: 10px;
-       box-shadow: $color-dark 0px 0px 13px 1px;
+       box-shadow: yellow 0px 0px 13px 1px;
        background-color: $color-tertiary;
+
+       img {
+        height: 60px;
+        width: 50px;
+        margin:5px;
+        order: -1;
+        border-radius: 10px;
+       }
       }
     }
   }
