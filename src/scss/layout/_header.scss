@@ -8,26 +8,30 @@
   top: 0;
   
   .title {
+    font-family: $font-primary;
+    font-size: 18px;
     color:$color-secondary;
   }
 
   .searching {
-    .userSearch{
+    .js-user-Search{
      border-radius: 5px;
-     padding: 3px;
+     padding: 3px; 
+     font-family: $font-primary;
     }
 
-    .search-btn {
+    .js-search-btn {
       border-radius: 5px;
       padding: 3px;
+      font-family: $font-primary;
       text-transform: capitalize;
       background-color: $color-accenture;
       
     }
-    .search-btn:hover {
+    .js-search-btn:hover {
       cursor: pointer;
     }
-    .search-btn:active {
+    .js-search-btn:active {
       transform: translateY(4px);
     }
   }  

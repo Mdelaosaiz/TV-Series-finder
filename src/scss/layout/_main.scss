@@ -1,60 +1,90 @@
 .main-wrapper{
   height: 75vh;
   margin: 10px;
-  background-color:$color-secondary;
   border-radius: 20px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-
-  .wrapper-films{
-    margin: 10px;
-    width: 80%;
+  justify-content: center;
+  font-family: $font-primary;
+  
+  .wrapper-films {
+    // margin: 20px;
+    padding:20px;
+    width: 70%;
     display: flex;
     flex-direction: row;
     justify-content: end;
     flex-wrap: wrap;
     overflow: auto;
-    border: 5px solid $color-accenture;
-    border-radius: 20px;
-    h2{
-      width: 90%;
-      margin: 15px 5px;
-      color:$color-light;
-      text-align: center;
-      text-transform: uppercase;
+
+    h2 {
+     width: 90%;
+     margin: 15px 5px;
+     color:$color-light;
+     font-family: $font-primary;
+     text-align: center;
+     text-transform: uppercase;
     }
   }
 
   article {
-   height: 200px;
-   margin: 20px;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   background-color: $color-tertiary;
-   border-radius: 20px;
-   box-shadow: $color-dark 0px 0px 13px 1px;
+    width: 210px;
+    height: 305px;
+    margin: 15px 15px;
+    font-size: .75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-tertiary;
+    border-radius: 20px;
+    border: 5px solid $color-accenture;
+    box-shadow: black 0px 0px 13px 1px;
+    font-family: $font-primary;
 
+   .js-title{
+    font-size: medium;
+    margin: 20px;
+    color:$color-light;
+    text-transform: uppercase;
+   }
+   .js-image-film{
+    height: 160px;
+    width: 140px;
+    border-radius: 10px;
+   }
+   .js-heart{
+     margin: 20px;
+     font-size: 20px; 
+    }
   }
-
+  article:active {
+  transform: translateY(4px);
+  }
+  article:hover{
+    box-shadow: yellow 0px 0px 13px 1px;
+  }
   .wrapper-favourites {
-    margin: 10px 5px;
-    padding: 5px;
+    margin: 20px;
+    padding:20px;
     width: 20%;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: flex-start;
     flex-wrap: wrap;
     order: -1;
     overflow: auto;
     border: 5px solid $color-accenture;
     border-radius: 20px;
+    box-shadow: black 0px 0px 13px 1px;
+    font-family: $font-primary;
+    background-color:$color-primary;
 
     h2{
      width: 90%;
      margin: 15px 5px;
      color:$color-light;
+     font-family: $font-primary;
      text-align: center;
      text-transform: uppercase;
     }
@@ -67,6 +97,8 @@
        background-color: $color-tertiary;
       }
     }
-
   }
+}
+.background{
+  color:yellow;
 }
