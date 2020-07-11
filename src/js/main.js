@@ -1,30 +1,41 @@
 'use strict';
+//Globales
+let favouriteList=[];
+let filteredFilm =[];
+const imgTemporary = 'https://via.placeholder.com/210x295/ffffff/666666/';
 
-// Creamos el html de las películas.
+//Funciones.
+// HTML de las películas.
 function createFilm (obj){
   let article = '<article class="" id="' + obj.show.id + '">';
   article += '<p class="js-title">' + obj.show.name + '</p>';
-  article +='<img class="js-image-film" src="' + obj.show.image.medium + '" alt="Carátula de la película">';
-  article += '<i class="fas fa-heart js-heart"></i>';
+  if (obj.show.image === null){
+    article +='<img class="js-image-film" src="' + imgTemporary + '" alt="Carátula de la película">';
+  }else {
+    article +='<img class="js-image-film" src="' + obj.show.image.medium + '" alt="Carátula de la película">';
+  }
+  if (favouriteList.findIndex(film => (film.show.id === obj.show.id))>=0){
+    article += '<i class="fas fa-heart js-heart background"></i>';
+  }else{
+    article += '<i class="fas fa-heart js-heart"></i>';
+  }
   article +='</article>';
   return article;
-  //hay que poner la imagen alternativa por si no tiene
-  //  if (obj.show.image === null){
-    //article +='<img class="js-image-film" src="' + imgTemporary + '" alt="Carátula de la película">'
-    //}
 }
-// console.log(createFilm);
+
+// HTML de los favoritos.
 function createFavourites (obj){
   let list = '<li class="wrapper-li" id="list-' + obj.show.id + '">';
   list += '<p class="">'+ obj.show.name + '</p>';
-  list += '<img class="js-image-film" src="' + obj.show.image.medium + '" alt="Carátula de la película">';
-  list += '<i class="fas fa-heart js-heart"></i>'
+  if (obj.show.image === null){
+    list +='<img class="js-image-film" src="' + imgTemporary + '" alt="Carátula de la película">';
+  } else {
+    list += '<img class="js-image-film" src="' + obj.show.image.medium + '" alt="Carátula de la película">';
+  }
+  list += '<i class="fas fa-times-circle"></i>';
   list += '</li>';
-  
   return list;
 }
-
-const imgTemporary = 'https://via.placeholder.com/210x295/ffffff/666666/';
 
 //Hacemos otra función que PINTA el 1º paso en la página.
 
@@ -44,6 +55,9 @@ function chargeFilm (array){
   for (let item of array){
     paintFilm (item);
   }
+  // for (let i=0; i<array.length; i++){
+  //   paintFilm(i);
+  // }
 }
 function chargeFavourite (array){
   document.querySelector('.js-favourites').innerHTML = '';
@@ -51,11 +65,7 @@ function chargeFavourite (array){
     paintFavourite (item);
   }
 }
-//creamos la lista de Favoritos.
-//creamos una función en la que: cambie el color del corazón (según esté en la lista) cuando se haga "click".
-
-let favouriteList=[];
-let filteredFilm =[];
+//creamos la lista de Favoritos. Una función en la que se cambie el color del corazón cuando se haga "click".
 
 function changeHeart (ev){
   let id = parseInt(ev.currentTarget.id);
@@ -105,10 +115,10 @@ btn.addEventListener('click',userSearch);
 
 // fucnión para recargar la página con la lista de favoritos cargada (si hay favoritos).
 function loadPage (){
- let favs = localStorage.getItem('fav');
- if (favs !== null){
-   favouriteList = JSON.parse(favs);
-   chargeFavourite (favouriteList);
- }
+  let favs = localStorage.getItem('fav');
+  if (favs !== null){
+    favouriteList = JSON.parse(favs);
+    chargeFavourite (favouriteList);
+  }
 }
 window.onload = loadPage;
