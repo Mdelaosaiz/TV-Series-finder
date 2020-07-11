@@ -2,6 +2,7 @@
 //Globales
 let favouriteList=[];
 let filteredFilm =[];
+const btn = document.querySelector('.js-search-btn');
 const imgTemporary = 'https://via.placeholder.com/210x295/ffffff/666666/';
 
 //Funciones.
@@ -25,14 +26,14 @@ function createFilm (obj){
 
 // HTML de los favoritos.
 function createFavourites (obj){
-  let list = '<li class="wrapper-li" id="list-' + obj.show.id + '">';
+  let list = '<li class="wrapper-li >';
   list += '<p class="">'+ obj.show.name + '</p>';
   if (obj.show.image === null){
     list +='<img class="js-image-film" src="' + imgTemporary + '" alt="Carátula de la película">';
   } else {
     list += '<img class="js-image-film" src="' + obj.show.image.medium + '" alt="Carátula de la película">';
   }
-  list += '<i class="fas fa-times-circle"></i>';
+  list += '<i class="fas fa-times-circle" id="list-' + obj.show.id + '></i>';
   list += '</li>';
   return list;
 }
@@ -87,7 +88,7 @@ function changeHeart (ev){
 
 // función para leer lo que escribe el usuario y activarlo con el botón de búsqeuda.
 //Aquí vamos a hacer el Fetch para empezar a ver los resultados de lo que estamos pintando.
-const btn = document.querySelector('.js-search-btn');
+
 
 function userSearch (ev){
   ev.preventDefault();
