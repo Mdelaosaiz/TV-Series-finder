@@ -73,7 +73,7 @@ function chargeFavourite (array){
     item.addEventListener('click',removeFavs);
   }
 }
-// función para leer lo que escribe el usuario y activarlo con el botón de búsqeuda. Aquí vamos a ha el Fetch.
+// función para leer lo que escribe el usuario y activarlo con el botón de búsqueda. Aquí vamos a hacer el Fetch.
 
 function userSearch (ev){
   ev.preventDefault();
