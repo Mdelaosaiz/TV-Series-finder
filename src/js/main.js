@@ -3,12 +3,13 @@
 let favouriteList=[];
 let filteredFilm =[];
 const btn = document.querySelector('.js-search-btn');
+// const cross =document.querySelector ('.fa-times-circle');
 const imgTemporary = 'https://via.placeholder.com/210x295/ffffff/666666/';
 
 //Funciones.
 // HTML de las películas.
 function createFilm (obj){
-  let article = '<article class="" id="' + obj.show.id + '">';
+  let article = '<article class="" id="art-' + obj.show.id + '">';
   article += '<p class="js-title">' + obj.show.name + '</p>';
   if (obj.show.image === null){
     article +='<img class="js-image-film" src="' + imgTemporary + '" alt="Carátula de la película">';
@@ -33,7 +34,7 @@ function createFavourites (obj){
   } else {
     list += '<img class="js-image-film" src="' + obj.show.image.medium + '" alt="Carátula de la película">';
   }
-  list += '<i class="fas fa-times-circle" id="list-' + obj.show.id + '></i>';
+  list += '<i class="fas fa-times-circle" id="list-' + obj.show.id + '"></i>';
   list += '</li>';
   return list;
 }
@@ -48,6 +49,7 @@ function paintFilm (obj){
 function paintFavourite (obj){
   let searchedFilm = document.querySelector('.js-favourites');
   searchedFilm.innerHTML += createFavourites(obj);
+
 }
 //RECORREMOS el array y llamamos a la función 2º para cada objeto.
 
@@ -65,30 +67,13 @@ function chargeFavourite (array){
   for (let item of array){
     paintFavourite (item);
   }
-}
-//creamos la lista de Favoritos. Una función en la que se cambie el color del corazón cuando se haga "click".
-
-function changeHeart (ev){
-  let id = parseInt(ev.currentTarget.id);
-  let heart = ev.currentTarget.querySelector('.js-heart');
-  heart.classList.toggle('background');
-  if(heart.classList.contains('background')){
-    let favFilm = filteredFilm.find(film => (film.show.id === id));
-    favouriteList.push(favFilm);
-  }else{
-    let index = favouriteList.findIndex(fav => fav.show.id === id);
-    if (index >= 0){
-      favouriteList.splice(index,1);
-    }
-
+  let cross =document.querySelectorAll ('.fa-times-circle');
+  for (let item of cross){
+    item.addEventListener('click',removeFavs);
   }
-  chargeFavourite(favouriteList);
-  localStorage.setItem('fav', JSON.stringify(favouriteList));
 }
-
 // función para leer lo que escribe el usuario y activarlo con el botón de búsqeuda.
 //Aquí vamos a hacer el Fetch para empezar a ver los resultados de lo que estamos pintando.
-
 
 function userSearch (ev){
   ev.preventDefault();
@@ -107,7 +92,41 @@ function userSearch (ev){
       }
     });
 }
+//creamos la lista de Favoritos. Una función en la que se cambie el color del corazón cuando se haga "click".
 
+function changeHeart (ev){
+  let id = parseInt(ev.currentTarget.id.substring(4));
+  let heart = ev.currentTarget.querySelector('.js-heart');
+  heart.classList.toggle('background');
+  if(heart.classList.contains('background')){
+    let favFilm = filteredFilm.find(film => (film.show.id === id));
+    favouriteList.push(favFilm);
+  }else{
+    let index = favouriteList.findIndex(fav => fav.show.id === id);
+    if (index >= 0){
+      favouriteList.splice(index,1);
+    }
+
+  }
+  chargeFavourite(favouriteList);
+  localStorage.setItem('fav', JSON.stringify(favouriteList));
+}
+//función con la que se pueden quitar los favoritos de la lista de favoritos
+
+function removeFavs (ev){
+  let id = parseInt(ev.currentTarget.id.substring(5));
+  let index = favouriteList.findIndex(fav => fav.show.id === id);
+  if (index >= 0){
+    favouriteList.splice(index,1);
+  }
+  chargeFavourite(favouriteList);
+  let article= document.querySelector('#art-'+id);
+  if(article !== null){
+    let heart = article.querySelector('.js-heart');
+    heart.classList.remove('background');
+  }
+  localStorage.setItem('fav', JSON.stringify(favouriteList));
+}
 // listeners
 btn.addEventListener('click',userSearch);
 
