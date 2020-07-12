@@ -1,30 +1,34 @@
 'use strict';
 //Globales
 let favouriteList=[];
-let filteredFilm =[];
+let selectedFilm =[];
 const btn = document.querySelector('.js-search-btn');
-// const cross =document.querySelector ('.fa-times-circle');
 const imgTemporary = 'https://via.placeholder.com/210x295/ffffff/666666/';
 
 //Funciones.
 // HTML de las películas.
 function createFilm (obj){
-  let article = '<article class="" id="art-' + obj.show.id + '">';
+  let favourite = (favouriteList.findIndex(film => (film.show.id === obj.show.id))>=0);
+  let article = '<article class="js-article" id="art-' + obj.show.id + '">';
   article += '<p class="js-title">' + obj.show.name + '</p>';
-  if (obj.show.image === null){
-    article +='<img class="js-image-film" src="' + imgTemporary + '" alt="Carátula de la película">';
-  }else {
-    article +='<img class="js-image-film" src="' + obj.show.image.medium + '" alt="Carátula de la película">';
-  }
-  if (favouriteList.findIndex(film => (film.show.id === obj.show.id))>=0){
+  if (favourite){
+    article +='<img class="js-image-film box-shadow" src="' + image(obj) + '" alt="Carátula de la película">';
     article += '<i class="fas fa-heart js-heart background"></i>';
   }else{
+    article +='<img class="js-image-film" src="' + image(obj) + '" alt="Carátula de la película">';
     article += '<i class="fas fa-heart js-heart"></i>';
   }
   article +='</article>';
   return article;
 }
+function image(obj) {
+  if (obj.show.image === null){
+    return imgTemporary;
 
+  }else {
+    return obj.show.image.medium;
+  }
+}
 // HTML de los favoritos.
 function createFavourites (obj){
   let list = '<li class="wrapper-li >';
@@ -58,9 +62,6 @@ function chargeFilm (array){
   for (let item of array){
     paintFilm (item);
   }
-  // for (let i=0; i<array.length; i++){
-  //   paintFilm(i);
-  // }
 }
 function chargeFavourite (array){
   document.querySelector('.js-favourites').innerHTML = '';
@@ -83,30 +84,31 @@ function userSearch (ev){
       return response.json();
     })
     .then(function(data) {
-      filteredFilm = data;
+      selectedFilm = data;
       chargeFilm (data);
       let articles= document.querySelectorAll('article');
       for (let article of articles){
-        article.addEventListener('click',changeHeart);
+        article.addEventListener('click',changeArticle);
 
       }
     });
 }
 //creamos la lista de Favoritos. Una función en la que se cambie el color del corazón cuando se haga "click".
 
-function changeHeart (ev){
+function changeArticle (ev){
   let id = parseInt(ev.currentTarget.id.substring(4));
   let heart = ev.currentTarget.querySelector('.js-heart');
+  let image = ev.currentTarget.querySelector('.js-image-film');
   heart.classList.toggle('background');
-  if(heart.classList.contains('background')){
-    let favFilm = filteredFilm.find(film => (film.show.id === id));
+  image.classList.toggle('box-shadow');
+  if(heart.classList.contains('background') || image.classList.contains('background')){
+    let favFilm = selectedFilm.find(film => (film.show.id === id));
     favouriteList.push(favFilm);
   }else{
     let index = favouriteList.findIndex(fav => fav.show.id === id);
     if (index >= 0){
       favouriteList.splice(index,1);
     }
-
   }
   chargeFavourite(favouriteList);
   localStorage.setItem('fav', JSON.stringify(favouriteList));
@@ -124,14 +126,13 @@ function removeFavs (ev){
   if(article !== null){
     let heart = article.querySelector('.js-heart');
     heart.classList.remove('background');
+    let image = article.querySelector('.js-image-film');
+    image.classList.remove('box-shadow');
   }
   localStorage.setItem('fav', JSON.stringify(favouriteList));
 }
 // listeners
 btn.addEventListener('click',userSearch);
-
-// estaría bien otro para quitar de favoritos
-// el último, en el botón del reset de la lista de favoritos, para quitarlos a todos de una vez.
 
 // fucnión para recargar la página con la lista de favoritos cargada (si hay favoritos).
 function loadPage (){
