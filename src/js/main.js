@@ -73,8 +73,7 @@ function chargeFavourite (array){
     item.addEventListener('click',removeFavs);
   }
 }
-// función para leer lo que escribe el usuario y activarlo con el botón de búsqeuda.
-//Aquí vamos a hacer el Fetch para empezar a ver los resultados de lo que estamos pintando.
+// función para leer lo que escribe el usuario y activarlo con el botón de búsqeuda. Aquí vamos a ha el Fetch.
 
 function userSearch (ev){
   ev.preventDefault();
