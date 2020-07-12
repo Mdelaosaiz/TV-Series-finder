@@ -39,7 +39,7 @@
     background-color: $color-tertiary;
     border-radius: 20px;
     border: 5px solid $color-accenture;
-    box-shadow: black 0px 0px 13px 1px;
+    box-shadow: $color-dark 0px 0px 13px 1px;
     font-family: $font-primary;
 
    .js-title {
@@ -62,7 +62,7 @@
   transform: translateY(4px);
   }
   article:hover {
-    box-shadow: yellow 0px 0px 13px 1px;
+    box-shadow: $color-bright 0px 0px 13px 1px;
   }
   .wrapper-favourites {
     margin: 20px;
@@ -76,7 +76,7 @@
     overflow: auto;
     border: 5px solid $color-accenture;
     border-radius: 20px;
-    box-shadow: black 0px 0px 13px 1px;
+    box-shadow: $color-dark 0px 0px 13px 1px;
     font-family: $font-primary;
     background-color:$color-primary;
 
@@ -98,7 +98,7 @@
        flex-direction: row;
        justify-content: space-around;
        border-radius: 10px;
-       box-shadow: yellow 0px 0px 13px 1px;
+       box-shadow: $color-bright 0px 0px 13px 1px;
        background-color: $color-tertiary;
 
        img {
@@ -113,8 +113,8 @@
   }
 }
 .background{
-  color:yellow;
+  color:$color-bright;
 }
 .box-shadow {
-  box-shadow: yellow 0px 0px 13px 1px;
+  box-shadow: $color-bright 0px 0px 13px 1px;
 }
